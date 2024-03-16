@@ -3,10 +3,11 @@ import {
   } from "react-router-dom";
 import React from 'react'
 import App from "./App";
-import { Navbar } from "react-bootstrap";
 import { ErrorPage } from "./Pages/ErrorPage";
 import MyNavbar from "./Navbar/MyNavbar";
 import { AddNote } from "./Pages/AddNote";
+import { ShowNotes } from "./Pages/ShowNotes";
+import { UpdateNote } from "./Pages/UpdateNote";
 
 
  const router = createBrowserRouter([
@@ -27,6 +28,14 @@ import { AddNote } from "./Pages/AddNote";
     {
       path: "/addNote",
       element : <AddNote/>
+    },
+    {
+      path: "/notes",
+      element: <ShowNotes/>
+    },
+    {
+      path: "/updateNote/:id",
+      element: <UpdateNote/>
     }
     
   ]);

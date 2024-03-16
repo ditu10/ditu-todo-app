@@ -11,8 +11,8 @@ const MyNavbar = () => {
           <Navbar.Brand href="#">Navbar</Navbar.Brand>
           <Nav className="me-auto">
             <NavLink className="text-decoration-none text-gray me-2" to="/">Home</NavLink>
-            <NavLink className="text-decoration-none text-gray me-2" to="/about">About</NavLink>
             <NavLink className="text-decoration-none text-gray me-2" to="/addNote">Add Note</NavLink>
+            <NavLink className="text-decoration-none text-gray me-2" to="/notes">View Note</NavLink>
           </Nav>
         </Container>
       </Navbar>

@@ -1,9 +1,8 @@
-import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button } from 'react-bootstrap';
 import MyNavbar from './Navbar/MyNavbar';
 import { Home } from './Pages/Home';
+import { Button } from 'react-bootstrap';
 
 
 function App() {
@@ -11,6 +10,7 @@ function App() {
     <div className="App">
       <MyNavbar></MyNavbar> 
       <Home/>
+      
     </div>
   );
 }
