@@ -1,14 +1,15 @@
 import React from 'react'
-import { ButtonGroup } from 'react-bootstrap';
+import { Button, ButtonGroup } from 'react-bootstrap';
 import Table from 'react-bootstrap/Table';
-import { NavLink } from 'react-router-dom';
+import { FormModal } from './FormModal';
 
-export const ViewNotesTable = ({notes, deleteNote, updateNote}) => {
+export const ViewNotesTable = ({notes,viewNotes, deleteNote, addNoteToTable, setNotes, updateNoteToTable}) => {
 
-console.log(notes)
+console.log(viewNotes)
     return (
         <div className='container mt-3'>
-        <Table striped responsive bordered hover>
+        <FormModal addNoteToTable={addNoteToTable}  heading="Add New Note" buttonName="Add note"/>
+        <Table className='mt-2' striped responsive bordered hover>
           <thead>
             <tr>
               <th>ID</th>
@@ -21,7 +22,7 @@ console.log(notes)
           </thead>
           <tbody>
             {
-                notes.map((note, key) => {
+                viewNotes.map((note, key) => {
                     return (
                       <tr key={key}>
                         <td>{note.id}</td>
@@ -31,9 +32,11 @@ console.log(notes)
                         <td>{note.status}</td>
                         <td>
                             <ButtonGroup>
-                                <button onClick={() => updateNote(note.id)} className=' my-0 btn btn-outline-primary' >Update </button>
+                                {/* <button onClick={() => updateNote(note.id)} className=' my-0 btn btn-outline-primary' >Update </button> */}
                                 {/* <NavLink className='text-decoration-none text-dark' to={'/updateNote/'+note.id}></NavLink> */}
-                                <button onClick={() => deleteNote(note.id)} className="my-0 btn btn-outline-danger">Delete</button>
+                                  <FormModal updateNoteToTable={updateNoteToTable} note={note} heading="Update the Note" buttonName="Update"/>
+                                  <Button  variant="danger" className='border my-0' onClick={() => deleteNote(note.id)}>Delete</Button>
+                                {/* <button onClick={() => deleteNote(note.id)} className="my-0 btn btn-outline-danger">Delete</button> */}
                             </ButtonGroup>
                         </td>
                       </tr> 

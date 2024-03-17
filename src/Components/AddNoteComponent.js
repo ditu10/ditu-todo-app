@@ -32,8 +32,9 @@ export const AddNoteComponent = ({note, isUpdate}) => {
           localStorage.setItem("notes", JSON.stringify(currentNotes));
         }
 
-        window.location.href="/notes"
       }; 
+
+     
     
       //console.log(watch("example")); // you can watch individual input by pass the name of the input
       return (
@@ -44,6 +45,7 @@ export const AddNoteComponent = ({note, isUpdate}) => {
                 {...register("title", {
                 required: true,
                 value: note? note.title : ""
+                
                 })}
             />
             {errors?.title?.type === "required" && <p>This field is required</p>}

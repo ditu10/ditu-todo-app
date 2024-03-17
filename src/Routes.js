@@ -4,7 +4,6 @@ import {
 import React from 'react'
 import App from "./App";
 import { ErrorPage } from "./Pages/ErrorPage";
-import MyNavbar from "./Navbar/MyNavbar";
 import { AddNote } from "./Pages/AddNote";
 import { ShowNotes } from "./Pages/ShowNotes";
 import { UpdateNote } from "./Pages/UpdateNote";
@@ -19,11 +18,7 @@ import { UpdateNote } from "./Pages/UpdateNote";
     }, 
     {
         path: "/about",
-        element : 
-        <div className="App">
-          <MyNavbar/>
-          <h2>This is about page</h2>
-        </div>
+        element : <App/>
     },
     {
       path: "/addNote",
