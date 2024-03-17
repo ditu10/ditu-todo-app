@@ -13,8 +13,7 @@ const MyNavbar = () => {
           </Navbar.Brand>
           <Nav className="ms-auto">
             <NavLink className="text-decoration-none text-gray me-3" to="/">Home</NavLink>
-            <NavLink className="text-decoration-none text-gray me-3" to="/addNote">Add Note</NavLink>
-            <NavLink className="text-decoration-none text-gray me-3" to="/notes">View Note</NavLink>
+            <NavLink className="text-decoration-none text-gray me-3" to="/notes">Notes</NavLink>
           </Nav>
         </Container>
       </Navbar>

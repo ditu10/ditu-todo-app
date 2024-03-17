@@ -56,7 +56,7 @@ export const FormModal = ({heading, buttonName, addNoteToTable, note, updateNote
   }
   return (
     <>
-    <Button className='border my-0' variant="primary" onClick={handleShow}>
+    <Button className='border' variant="outline-primary" onClick={handleShow}>
         {buttonName}
       </Button>
 
@@ -94,9 +94,9 @@ export const FormModal = ({heading, buttonName, addNoteToTable, note, updateNote
             
             </Form.Select>
 
-            <Button variant='outline-warning' className='w-100 mt-4 mb-2 py-2' onClick={clearForm}>clear</Button>
+            <Button variant='outline-danger' className='w-100 mt-4 mb-2 py-2' onClick={clearForm}>clear</Button>
 
-            <Button onClick={() => handleSubmit()} className='w-100 my-0 py-2' variant="primary" type="button">
+            <Button onClick={() => handleSubmit()} className='w-100 my-0 py-2' variant="outline-success" type="button">
                 Submit
             </Button>
         </Form>

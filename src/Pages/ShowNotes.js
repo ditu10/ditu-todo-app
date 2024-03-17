@@ -65,7 +65,7 @@ export const ShowNotes = () => {
         <div className='mt-2'>
         <h2 className='text-center'>All Notes</h2>
         <div  className='container'>
-            <input placeholder='search title or description' onChange={handleSearchBtn} name='search' id='search'/>
+            <input className='py-2 w-100 px-3 rounded' placeholder='search title or description' onChange={handleSearchBtn} name='search' id='search'/>
             
         </div>
         <ViewNotesTable updateNoteToTable={updateNoteToTable} addNoteToTable={addNoteToTable} notes={notes} setNotes={setNotes} setViewNotes={setViewNotes} viewNotes={viewNotes} updateNote={updateNote} deleteNote={deleteNote} />

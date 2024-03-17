@@ -1,6 +1,6 @@
 import React from 'react'
 import { useForm } from 'react-hook-form';
-import "./addNote.css"
+// import "./addNote.css"
 import { v4 as uuid } from "uuid";
 export const AddNoteComponent = ({note, isUpdate}) => {
     // console.log(isUpdate)
