@@ -5,7 +5,6 @@ import { ViewNotesTable } from '../Components/ViewNotesTable';
 export const ShowNotes = () => {
     const [notes, setNotes] = useState(localStorage.getItem("notes")? JSON.parse(localStorage.getItem("notes")) : []);
     const [viewNotes, setViewNotes] = useState([...notes])
-    // const [show, setShow] = useState(false);
 
     useEffect(()=>{
         const handleKeyDown = (event) => {

@@ -1,47 +1,109 @@
 import React, { useRef, useState } from 'react'
-import { Button, ButtonGroup, Modal } from 'react-bootstrap';
+import { Button, ButtonGroup, FloatingLabel, Form, Modal } from 'react-bootstrap';
 import Table from 'react-bootstrap/Table';
 import { FormModal } from './FormModal';
+import { SortButton } from './SortButton';
 
 
 export const ViewNotesTable = ({notes,viewNotes,setViewNotes, deleteNote, addNoteToTable, setNotes, updateNoteToTable}) => {
-const sorting = useRef();
-const [show, setShow] = useState(false);
+    const statusRef = useRef()
+    const priorityRef = useRef()
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-const statusVal = {
-  "Pending" : 1,
-  "In Progress" : 2,
-  "Completed" : 3,
-  "Failed" : 4
-}
+    const [show, setShow] = useState(false);
 
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    const statusVal = {
+      "Pending" : 1,
+      "In Progress" : 2,
+      "Completed" : 3,
+      "Failed" : 4
+    }
 
-const sortAscending =(isAsc) =>{
-  const sortProperty =sorting.current.value;
-  let temp = [...viewNotes];
-  
-  if(sortProperty === 'status'){
-    temp.sort((a,b) => {
-      return isAsc? statusVal[a[sortProperty]] - statusVal[b[sortProperty]] :
-               statusVal[b[sortProperty]] - statusVal[a[sortProperty]]
-    })
-  } else{
-      temp.sort((a,b) => {
-      return isAsc ? a[sortProperty].localeCompare(b[sortProperty]):
-               b[sortProperty].localeCompare(a[sortProperty])
-    })
-  }
-  
-  console.log(temp)
-  setViewNotes(temp)
+    const status = ["Pending", "In Progress", "Completed", "Failed"];
+    const priority = [1,2,3,4,5];
 
-}
+    
 
-const undoSorting = () => {
-  setViewNotes(notes)
-}
+    const handleSorting = (isAsc, fieldName) => {
+      console.log(isAsc + "  " + fieldName)
+      const sortProperty = fieldName;
+      let temp = [...viewNotes];
+      
+      if(sortProperty === 'status'){
+        temp.sort((a,b) => {
+          return isAsc? statusVal[a[sortProperty]] - statusVal[b[sortProperty]] :
+                  statusVal[b[sortProperty]] - statusVal[a[sortProperty]]
+        })
+      } else{
+          temp.sort((a,b) => {
+          return isAsc ? a[sortProperty].localeCompare(b[sortProperty]):
+                  b[sortProperty].localeCompare(a[sortProperty])
+        })
+      }
+      
+      console.log(temp)
+      setViewNotes(temp)
+    }
+
+    const filterNotes = (fieldName) =>{
+      let val;
+      let anotherVal;
+      let anotherField;
+
+      switch (fieldName) {
+        case 'status': 
+          val = statusRef.current.value
+          anotherField = 'priority'
+          anotherVal = priorityRef.current.value
+          break
+        case 'priority':
+          val = priorityRef.current.value
+          anotherField = 'status'
+          anotherVal = statusRef.current.value
+          break
+
+        default:
+          break
+      }
+      const temp = [...notes];
+
+      if(val === 'all' && anotherVal === 'all'){
+        setViewNotes(notes)
+        
+      }
+      else if(val !== 'all' && anotherVal !== 'all') {
+        const filteredNotes = temp.filter(note => {
+          if(note[fieldName] === val && note[anotherField] === anotherVal) {
+            return note;
+          }
+        })
+        setViewNotes(filteredNotes)
+      }
+      else if(val === 'all' & anotherVal !== 'all') {
+        const filteredNotes = temp.filter(note => {
+          if(note[anotherField] === anotherVal) {
+            return note;
+          }
+        })
+        setViewNotes(filteredNotes)
+      }
+      else {
+        const filteredNotes = temp.filter(note => {
+          if(note[fieldName] === val) {
+            return note;
+          }
+        })
+        setViewNotes(filteredNotes)
+      }
+      
+
+      
+    }
+
+    const undoSorting = () => {
+      setViewNotes(notes)
+    }
 
     return (
         <div className='container mt-3'>
@@ -68,37 +130,51 @@ const undoSorting = () => {
         <div className='d-flex justify-content-between'>
 
         <FormModal addNoteToTable={addNoteToTable}  heading="Add New Note" buttonName="Add note"/>
-        <div>
-          <select className='py-1 me-2' ref={sorting} defaultValue="title">
-            <option value="title">Title</option>
-            <option value="description">Description</option>
-            <option value="priority">priority</option>
-            <option value="createdAt">Created At</option>
-            <option value="updatedAt">Updated At</option>
-            <option value="status">Status</option>
-          </select>
+        
+        <div className='d-flex gap-2'>
+          <FloatingLabel controlId="status" label="Status">
+              <Form.Select ref={statusRef}  onChange={() => filterNotes('status')}>
+                <option value="all">All</option>
+                  {
+                  status.map(x => {
+                    return (<option value={x}>{x}</option>)
+                  })
+                }
+              </Form.Select>
+            </FloatingLabel>
 
-          <button onClick={() => sortAscending(true)} className='me-2'>ASC</button>
-          <button onClick={() => sortAscending(false)} className='me-2'>DESC</button>
-          <button onClick={() => undoSorting()} className='me-2'>Undo Sorting</button>
-          <button className="" onClick={handleShow}>
-              ShortCut Tips
-          </button>
+            <FloatingLabel controlId="priority" label="Priority">
+              <Form.Select ref={priorityRef} onChange={() => filterNotes('priority')}>
+                <option value="all">All</option>
+                  {
+                priority.map(x => {
+                    return (<option value={x}>{x}</option>)
+                  })
+                }
+              </Form.Select>
+            </FloatingLabel>
+
+          <div>
+            <button onClick={() => undoSorting()} className='me-2 btn btn-outline-secondary'>Undo Sorting</button>
+            <button className='me-2 btn btn-outline-secondary' onClick={handleShow}> ShortCut Tips </button>
+          </div>
           
+          </div>
         </div>
-        </div>
-        <Table className='mt-2' striped responsive bordered hover>
+
+        <Table className='mt-3' striped responsive bordered hover>
           <thead>
             <tr>
               <th>ID</th>
-              <th>Title
-              
-              </th>
-              <th>Description</th>
-              <th>priority</th>
-              <th>Created At</th>
-              <th>Updated At</th>
-              <th>Status</th>
+
+              <th> Title <SortButton handleSorting={handleSorting} fieldName="title" /> </th>
+              <th >Description <SortButton handleSorting={handleSorting} fieldName="description" /> </th>
+              <th>priority <SortButton handleSorting={handleSorting} fieldName="priority"/> </th>
+              <th>Created At <SortButton handleSorting={handleSorting} fieldName="createdAt" /> </th>
+              <th>Updated At <SortButton handleSorting={handleSorting} fieldName="updatedAt" /> </th>
+              <th>Status <SortButton handleSorting={handleSorting} fieldName="status" /> </th>
+
+
               <th>Actions</th>
             </tr>
           </thead>

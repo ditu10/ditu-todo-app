@@ -56,7 +56,7 @@ export const FormModal = ({heading, buttonName, addNoteToTable, note, updateNote
   }
   return (
     <>
-    <Button className='border' variant="outline-primary" onClick={handleShow}>
+    <Button className='border ' variant="outline-primary" onClick={handleShow}>
         {buttonName}
       </Button>
 
