@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import MyNavbar from '../Navbar/MyNavbar'
 import { ViewNotesTable } from '../Components/ViewNotesTable';
 
@@ -7,6 +7,42 @@ export const ShowNotes = () => {
     const [viewNotes, setViewNotes] = useState([...notes])
     // const [show, setShow] = useState(false);
 
+    useEffect(()=>{
+        const handleKeyDown = (event) => {
+            if (event.altKey && event.key === 's') {
+              event.preventDefault(); // Prevent default behavior (e.g., browser search)
+              const searchBar = document.getElementById('search');
+              if (searchBar) {
+                searchBar.focus();
+              }
+            }
+          };
+
+          const handleDKeyDown = (event) => {
+            if (event.altKey && event.key === 'd') {
+              event.preventDefault(); // Prevent default behavior (e.g., browser search)
+           
+              const confirm = window.confirm("Are you sure to delete notes from local storage?")
+              if(confirm) {
+                localStorage.setItem("notes", JSON.stringify([]))
+                setNotes([]);
+                setViewNotes([])
+              }
+            }
+          };
+
+
+
+          document.addEventListener('keydown', handleKeyDown);
+          document.addEventListener('keydown', handleDKeyDown);
+          return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+            document.removeEventListener('keydown', handleDKeyDown);
+          };
+      
+    },[])
+
+  
 
     const deleteNote = (id) => {
         let newNotes = notes.filter( note => {

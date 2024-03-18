@@ -16,6 +16,8 @@ console.log(viewNotes)
               <th>Title</th>
               <th>Description</th>
               <th>priority</th>
+              <th>Created At</th>
+              <th>Updated At</th>
               <th>Status</th>
               <th>Actions</th>
             </tr>
@@ -29,6 +31,8 @@ console.log(viewNotes)
                         <td>{note.title}</td>
                         <td>{note.description}</td>
                         <td>{note.priority}</td>
+                        <td>{note.createdAt}</td>
+                        <td>{note.updatedAt}</td>
                         <td>{note.status}</td>
                         <td>
                             <ButtonGroup>
