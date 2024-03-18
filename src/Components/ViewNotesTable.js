@@ -1,11 +1,15 @@
-import React, { useRef } from 'react'
-import { Button, ButtonGroup } from 'react-bootstrap';
+import React, { useRef, useState } from 'react'
+import { Button, ButtonGroup, Modal } from 'react-bootstrap';
 import Table from 'react-bootstrap/Table';
 import { FormModal } from './FormModal';
 
 
 export const ViewNotesTable = ({notes,viewNotes,setViewNotes, deleteNote, addNoteToTable, setNotes, updateNoteToTable}) => {
 const sorting = useRef();
+const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 const statusVal = {
   "Pending" : 1,
   "In Progress" : 2,
@@ -41,7 +45,28 @@ const undoSorting = () => {
 
     return (
         <div className='container mt-3'>
+          
+          <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>ShortCut Key</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+          <div>
+            <h5>ShortCut Key: </h5>
+            <p>'Alt + d' = Delete all the notes from localStorage</p>
+            <p>'Alt + s' = Focus on the search bar</p>
+          </div>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+           
+          </Modal.Footer>
+        </Modal>
+          
         <div className='d-flex justify-content-between'>
+
         <FormModal addNoteToTable={addNoteToTable}  heading="Add New Note" buttonName="Add note"/>
         <div>
           <select className='py-1 me-2' ref={sorting} defaultValue="title">
@@ -56,6 +81,10 @@ const undoSorting = () => {
           <button onClick={() => sortAscending(true)} className='me-2'>ASC</button>
           <button onClick={() => sortAscending(false)} className='me-2'>DESC</button>
           <button onClick={() => undoSorting()} className='me-2'>Undo Sorting</button>
+          <button className="" onClick={handleShow}>
+              ShortCut Tips
+          </button>
+          
         </div>
         </div>
         <Table className='mt-2' striped responsive bordered hover>
@@ -87,11 +116,8 @@ const undoSorting = () => {
                         <td>{note.status}</td>
                         <td>
                             <ButtonGroup>
-                                {/* <button onClick={() => updateNote(note.id)} className=' my-0 btn btn-outline-primary' >Update </button> */}
-                                {/* <NavLink className='text-decoration-none text-dark' to={'/updateNote/'+note.id}></NavLink> */}
                                   <FormModal updateNoteToTable={updateNoteToTable} note={note} heading="Update the Note" buttonName="Update"/>
                                   <Button  variant="outline-danger" className='border' onClick={() => deleteNote(note.id)}>Delete</Button>
-                                {/* <button onClick={() => deleteNote(note.id)} className="my-0 btn btn-outline-danger">Delete</button> */}
                             </ButtonGroup>
                         </td>
                       </tr> 
