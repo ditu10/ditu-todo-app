@@ -74,7 +74,7 @@ export const ShowNotes = () => {
     const addNoteToTable =(newNote) => {
         setNotes([...notes, newNote])
         setViewNotes([...viewNotes, newNote])
-        let currentNotes = JSON.parse(localStorage.getItem("notes"));
+        let currentNotes = localStorage.getItem("notes") ? JSON.parse(localStorage.getItem("notes")) : [];
         currentNotes = [...currentNotes, newNote]
         localStorage.setItem("notes", JSON.stringify(currentNotes))
 

@@ -180,7 +180,7 @@ export const ViewNotesTable = ({notes,viewNotes,setViewNotes, deleteNote, addNot
           </thead>
           <tbody>
             {
-                viewNotes.map((note, key) => {
+              viewNotes.map((note, key) => {
                     return (
                       <tr key={key}>
                         <td>{note.id}</td>

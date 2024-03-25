@@ -33,12 +33,12 @@ export const FormModal = ({heading, buttonName, addNoteToTable, note, updateNote
         description: description.current.value,
         priority: priority.current.value,
         status: status.current.value,
-        updatedAt: new Date().toISOString()
+        updatedAt: new Date().toLocaleString()
       };
 
       if(!note) {
         formData.id = uuid().slice(0,8)
-        formData.createdAt = new Date().toISOString()
+        formData.createdAt = new Date().toLocaleString()
       } else {
         formData.id = note.id;
         formData.createdAt = note.createdAt;
