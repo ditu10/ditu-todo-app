@@ -5,6 +5,7 @@ import React from 'react'
 import App from "./App";
 import { ErrorPage } from "./Pages/ErrorPage";
 import { ShowNotes } from "./Pages/ShowNotes";
+import { TrackTodo } from "./Pages/TrackTodo";
 
 
  const router = createBrowserRouter([
@@ -15,12 +16,12 @@ import { ShowNotes } from "./Pages/ShowNotes";
       errorElement: <ErrorPage/>,
     }, 
     {
-        path: "/about",
-        element : <App/>
+        path: "/track_todo",
+        element : <TrackTodo/>
     },
     
     {
-      path: "/notes",
+      path: "/todos",
       element: <ShowNotes/>
     },
     

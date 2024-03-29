@@ -98,7 +98,7 @@ export const ShowNotes = () => {
     <>
         <MyNavbar/>
         <div className='mt-2'>
-        <h2 className='text-center'>All Notes</h2>
+        <h2 className='text-center'>All Todos</h2>
         <div  className='container'>
             <input className='py-2 w-100 px-3 rounded' placeholder='search title or description' onChange={handleSearchBtn} name='search' id='search'/>
             

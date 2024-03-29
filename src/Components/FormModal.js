@@ -7,7 +7,7 @@ import Modal from 'react-bootstrap/Modal';
 import { v4 as uuid } from "uuid";
 
 
-export const FormModal = ({heading, buttonName, addNoteToTable, note, updateNoteToTable}) => {
+export const FormModal = ({heading, buttonName, addNoteToTable, note, updateNoteToTable, children}) => {
 
   const title = useRef();
   const description = useRef();
@@ -56,9 +56,9 @@ export const FormModal = ({heading, buttonName, addNoteToTable, note, updateNote
   }
   return (
     <>
-    <Button className='border ' variant="outline-primary" onClick={handleShow}>
-        {buttonName}
-      </Button>
+    <span style={{cursor:'pointer'}} onClick={handleShow}>
+        {children}
+      </span>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
